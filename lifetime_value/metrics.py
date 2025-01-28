@@ -95,6 +95,14 @@ def decile_stats(
     df: Bucket level statistics.
   """
   num_buckets = 10
+  if y_pred is None or len(y_pred) == 0:
+    raise ValueError("Input 'y_pred' is empty.")
+
+  y_pred = pd.to_numeric(y_pred, errors='coerce')  # Ensure numeric data
+  y_pred = y_pred.dropna()  # Remove NaN values
+    
+  if len(y_pred) < num_buckets:
+        raise ValueError("Not enough data points or unique values for the specified number of buckets.")
   decile = pd.qcut(
       y_pred, q=num_buckets, labels=['%d' % i for i in range(num_buckets)],duplicates='drop')
 
