@@ -99,7 +99,7 @@ def decile_stats(
     raise ValueError("Input 'y_pred' is empty.")
 
   y_pred = pd.to_numeric(y_pred, errors='coerce')  # Ensure numeric data
-  y_pred = y_pred.dropna()  # Remove NaN values
+  # y_pred = y_pred.dropna()  # Remove NaN values
     
   if len(y_pred) < num_buckets:
         raise ValueError("Not enough data points or unique values for the specified number of buckets.")
