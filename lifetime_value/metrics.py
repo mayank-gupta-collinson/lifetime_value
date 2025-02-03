@@ -106,14 +106,14 @@ def decile_stats(
   # decile = pd.qcut(
   #     y_pred, q=num_buckets, labels=['%d' % i for i in range(num_buckets)],duplicates='drop')
   decile = pd.qcut(
-      y_pred, q=num_buckets, labels=False ,duplicates='drop')
+      y_pred, q=num_buckets, labels=[str(i) for i in range(num_buckets)] ,duplicates='drop')
 
 
   df = pd.DataFrame({
       'y_true': y_true,
       'y_pred': y_pred,
-      'decile': decile,
-  }).groupby('decile', group_keys=True).apply(_aggregate_fn)
+      'decile': decile.astype(str),
+  }).groupby('decile', group_keys=False).apply(_aggregate_fn).reset_index()
 
   df['decile_mape'] = np.abs(df['pred_mean'] -
                              df['label_mean']) / df['label_mean']
