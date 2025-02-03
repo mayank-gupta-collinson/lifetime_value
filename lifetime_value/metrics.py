@@ -113,7 +113,7 @@ def decile_stats(
       'y_true': y_true,
       'y_pred': y_pred,
       'decile': decile,
-  }).groupby('decile').apply(_aggregate_fn)
+  }).groupby('decile', group_keys=True).apply(_aggregate_fn)
 
   df['decile_mape'] = np.abs(df['pred_mean'] -
                              df['label_mean']) / df['label_mean']
