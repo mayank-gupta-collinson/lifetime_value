@@ -106,7 +106,7 @@ def decile_stats(
   # decile = pd.qcut(
   #     y_pred, q=num_buckets, labels=['%d' % i for i in range(num_buckets)],duplicates='drop')
   decile = pd.qcut(
-      y_pred, q=num_buckets, labels=[str(i) for i in range(num_buckets)] ,duplicates='drop')
+      y_pred, q=num_buckets, labels=False ,duplicates='drop')
 
 
   df = pd.DataFrame({
