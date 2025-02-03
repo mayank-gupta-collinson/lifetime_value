@@ -103,8 +103,11 @@ def decile_stats(
     
   if len(y_pred) < num_buckets:
         raise ValueError("Not enough data points or unique values for the specified number of buckets.")
+  # decile = pd.qcut(
+  #     y_pred, q=num_buckets, labels=['%d' % i for i in range(num_buckets)],duplicates='drop')
   decile = pd.qcut(
-      y_pred, q=num_buckets, labels=['%d' % i for i in range(num_buckets)],duplicates='drop')
+      y_pred, q=num_buckets, labels=False ,duplicates='drop')
+
 
   df = pd.DataFrame({
       'y_true': y_true,
